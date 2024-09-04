@@ -16,43 +16,59 @@
 
 #include <stdio.h>
 
-//Funcion que imprime los espacios que se le entregan como parametro
+/*
+Función PrintSpaces que imprime un número específico de espacios.
+- amount: número total de espacios a imprimir
+- index: índice actual, usado para contar cuántos espacios se han impreso
+*/
 void PrintSpaces(int amount, int index){
     if(index < amount){
         printf(" ");
-        PrintSpaces(amount, index+1);
+        PrintSpaces(amount, index+1);  // Llamada recursiva para imprimir el siguiente espacio
     }
 }
 
-//Funcion que imprime las letras "Z" que se le entregan como parametro
+/*
+Función PrintZ que imprime un número específico de letras 'Z'.
+- amount: número total de letras 'Z' a imprimir
+- index: índice actual, usado para contar cuántas letras 'Z' se han impreso
+*/
 void PrintZ(int amount, int index){
     if(index < amount){
         printf("Z");
-        PrintZ(amount, index+1);
+        PrintZ(amount, index+1);  // Llamada recursiva para imprimir la siguiente letra 'Z'
     }
 }
 
-//Funcion que imprime la forma del diamante, recibe la cantidad de espacios, letras "Z" y boolean que sirve para saber si de imprime la parte de arriba del diamante o la de abajo
+/*
+Función PrintDiamond que imprime un patrón en forma de diamante.
+- amountZ: número de letras 'Z' en la línea actual
+- amountSpaces: número de espacios antes de las letras 'Z'
+- boolean: indicador para saber si se está imprimiendo la parte superior (0) o la parte inferior (1) del diamante
+*/
 void PrintDiamond(int amountZ, int amountSpaces, int boolean) {
-    if (boolean == 0) {
-        if (amountZ <= 7) {
-            PrintSpaces(amountSpaces, 0);
-            PrintZ(amountZ, 0);
-            printf("\n");
-            PrintDiamond(amountZ + 2, amountSpaces - 1, boolean);
-        } else {
+    if (boolean == 0) {  // Parte superior del diamante
+        if (amountZ <= 7) {  // Continúa mientras el número de letras 'Z' sea menor o igual a 7
+            PrintSpaces(amountSpaces, 0);  // Imprime espacios antes de las letras 'Z'
+            PrintZ(amountZ, 0);  // Imprime las letras 'Z'
+            printf("\n");  // Nueva línea
+            PrintDiamond(amountZ + 2, amountSpaces - 1, boolean);  // Llamada recursiva para la siguiente línea
+        } else {  // Cuando se alcanza el ancho máximo, empieza a imprimir la parte inferior del diamante
             PrintDiamond(amountZ, amountSpaces, 1);
         }
-    } else if (amountZ > 0) {
-        PrintSpaces(amountSpaces, 0);
-        PrintZ(amountZ, 0);
-        printf("\n");
-        PrintDiamond(amountZ - 2, amountSpaces + 1, 1);  
+    } else if (amountZ > 0) {  // Parte inferior del diamante
+        PrintSpaces(amountSpaces, 0);  // Imprime espacios antes de las letras 'Z'
+        PrintZ(amountZ, 0);  // Imprime las letras 'Z'
+        printf("\n");  // Nueva línea
+        PrintDiamond(amountZ - 2, amountSpaces + 1, 1);  // Llamada recursiva para la siguiente línea
     }
 }
 
+/*
+Función principal que inicia la ejecución del programa.
+*/
 int main(){
-    printf("Este programa imprime un patron determinado en pantalla.\n\n");
-    PrintDiamond(1, 9, 0);
+    printf("Este programa imprime un patrón determinado en pantalla.\n\n");
+    PrintDiamond(1, 9, 0);  // Comienza a imprimir el diamante con 1 letra 'Z' y 9 espacios
     return 0;
 }

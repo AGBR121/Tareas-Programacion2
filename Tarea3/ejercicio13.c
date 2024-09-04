@@ -1,6 +1,6 @@
 /*
 - Fecha de publicación: 2/09/2024
-- Hora de publicación: 7:40pm
+- Hora de publicación: 8:40pm
 - Versión del código: 1
 - Autor: Ing(c) Burbano Rodriguez Angel Gabriel
 - Nombre del lenguaje utilizado: C

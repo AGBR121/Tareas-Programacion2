@@ -20,7 +20,7 @@
 void PrintSpaces(int amount, int index){
     if(index < amount){
         printf(" ");
-        PrintSpaces(amount, index+1);
+        PrintSpaces(amount, index+1);  // Llamada recursiva para imprimir el siguiente espacio
     }
 }
 
@@ -28,7 +28,7 @@ void PrintSpaces(int amount, int index){
 void PrintA(int amount, int index){
     if(index < amount){
         printf("A");
-        PrintA(amount, index+1);
+        PrintA(amount, index+1);  // Llamada recursiva para imprimir el siguiente carácter 'A'
     }
 }
 
@@ -37,26 +37,26 @@ void PrintA(int amount, int index){
 void PrintTriangle(int amountA, int amountSpaces, int bool){
     if(bool == 1){ // Fase de contracción del triángulo
         if(amountA > 0){
-            PrintSpaces(amountSpaces, 0);
-            PrintA(amountA, 0);
-            printf("\n");
-            PrintTriangle(amountA-1, amountSpaces+1, 1); // Reduce la cantidad de 'A' y aumenta los espacios
+            PrintSpaces(amountSpaces, 0);  // Imprime los espacios necesarios para centrar la línea
+            PrintA(amountA, 0);  // Imprime los caracteres 'A'
+            printf("\n");  // Nueva línea para la siguiente fila del triángulo
+            PrintTriangle(amountA-1, amountSpaces+1, 1);  // Reduce la cantidad de 'A' y aumenta los espacios
         }
     }
     else if(amountA < 6){ // Fase de expansión del triángulo
-        PrintSpaces(amountSpaces, 0);
-        PrintA(amountA, 0);
-        printf("\n");
-        PrintTriangle(amountA+1, amountSpaces-1, 0); // Incrementa la cantidad de 'A' y reduce los espacios
+        PrintSpaces(amountSpaces, 0);  // Imprime los espacios necesarios para centrar la línea
+        PrintA(amountA, 0);  // Imprime los caracteres 'A'
+        printf("\n");  // Nueva línea para la siguiente fila del triángulo
+        PrintTriangle(amountA+1, amountSpaces-1, 0);  // Incrementa la cantidad de 'A' y reduce los espacios
     }
     else{
-        PrintTriangle(amountA, amountSpaces, 1); // Transición a la fase de contracción
+        PrintTriangle(amountA, amountSpaces, 1);  // Transición a la fase de contracción
     }
 }
 
 int main(){
-    printf("Este programa imprime un patron determinado en pantalla.\n\n");
-    // Se llama a la función PrintTriangle con los valores iniciales
+    printf("Este programa imprime un patrón determinado en pantalla.\n\n");
+    // Llama a la función PrintTriangle con los valores iniciales para comenzar a imprimir el patrón
     PrintTriangle(1, 39, 0);
     return 0;
 }

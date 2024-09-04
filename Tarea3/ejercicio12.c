@@ -16,19 +16,33 @@
 
 #include<stdio.h>
 
-void ReversedNumber(int number, int reversed){
-    if(number == 0){
+/*
+Función ReversedNumber que imprime el número ingresado al revés.
+- number: el número que se está procesando.
+- reversed: el número que contiene la versión invertida del número original.
+*/
+void ReversedNumber(int number, int reversed) {
+    if(number == 0) {
+        // Si number es 0, se imprime el número invertido acumulado.
         printf("%i", reversed);
-    }else{
-        ReversedNumber(number/10, reversed*10+number%10);
+    } else {
+        // Llamada recursiva con number reducido y reversed actualizado.
+        ReversedNumber(number / 10, reversed * 10 + number % 10);
     }
 }
 
-int main(){
+int main() {
+    // Inicializa la variable para almacenar el número ingresado por el usuario.
     int number = 0;
+
+    // Informa al usuario sobre la función del programa.
     printf("Este programa lee desde el teclado un número entero y lo imprime al revés.");
+    
+    // Solicita al usuario que ingrese un número.
     printf("\nEntre el número: ");
     scanf("%i", &number);
+
+    // Llama a la función ReversedNumber para invertir el número ingresado.
     ReversedNumber(number, 0);
     return 0;
 }
