@@ -11,46 +11,49 @@
 - Universidad Tecnológica de Pereira
 - Programa de Ingeniería de Sistemas y Computación
 - Asignatura IS284 Programación II
-- Descripción del programa: Este programa recibe por teclado el valor de x y la cantidad de digitos a sumar en la serie de 
-taylor, e imprime el resultado del seno para esa x
+- Descripción del programa: Este programa recibe por teclado el valor de x y la cantidad de dígitos a sumar en la serie de 
+Taylor, e imprime el resultado del seno para ese x
 */
 
 #include <stdio.h>
 #include <math.h>
 
-long int CalculateFactorial(int number, long int factorial){ //Se crea la funcion CalculateFactorial
-    if(number == 0){
+// Función recursiva que calcula el factorial de un número entero 'number'
+// 'factorial' es un acumulador que se multiplica en cada llamada recursiva
+long int CalculateFactorial(int number, long int factorial) {
+    if (number == 0) {
         return 1;
     }
-    if (number == 1){
+    if (number == 1) {
         return factorial;
     }
-    else{
-        return CalculateFactorial(number-1, number*factorial);
-    }
+    return CalculateFactorial(number - 1, number * factorial);
 }
 
-double GetSen(double x, int times, int index){
-    if (index > times){
-        return 0;
+// Función recursiva que calcula el valor del seno usando la serie de Taylor
+// 'times' es el número total de términos a sumar y 'index' es el índice actual
+double GetSen(double x, int times, int index) {
+    if (index > times) {
+        return 0; // Caso base: si el índice es mayor que el número de términos, retornar 0
     } else {
-        return (pow(-1 , index) * pow(x,2 * index + 1)) / CalculateFactorial(2 * index + 1, 1) + GetSen(x, times, index + 1);
+        // Cálculo del término actual de la serie de Taylor para el seno
+        return (pow(-1, index) * pow(x, 2 * index + 1)) / CalculateFactorial(2 * index + 1, 1)
+               + GetSen(x, times, index + 1); // Llamada recursiva para sumar el siguiente término
     }
-    
 }
 
-int main(){
-    //Inicializamos las variables x y terms, donde guardaremos el valor ingresado por el usuario
-    double x = 0;
-    int terms = 0; 
+int main() {
+    double x = 0; // Variable para almacenar el valor de x
+    int terms = 0; // Variable para almacenar el número de términos
 
-    printf("Este programa calcula por serie de taylor la funcion senx."); //Explicamos brevemente lo que hace el programa
-    printf("\nIngrese el valor de x que para reemplazar en la serie de taylor: "); //Le pedimos al usuario que ingrese el valor de x que desea averiguar
-    scanf("%lf", &x); //Le asignamos el valor ingresado a la variable x
-    printf("Ingrese el numero de terminos de la serie que desea sumar (numero entero positivo): ");
-    scanf("%i", &terms);
+    printf("Este programa calcula por serie de Taylor la función sen(x).\n");
+    printf("Ingrese el valor de x que desea reemplazar en la serie de Taylor: ");
+    scanf("%lf", &x); // Lee el valor de x desde la entrada estándar
+    printf("Ingrese el número de términos de la serie que desea sumar (número entero positivo): ");
+    scanf("%i", &terms); // Lee el número de términos desde la entrada estándar
 
-    printf("%lf", GetSen(x, terms, 0));
+    // Calcula e imprime el resultado de la serie de Taylor para la función seno
+    printf("Resultado: %lf\n", GetSen(x, terms, 0));
 
     return 0;
 }
